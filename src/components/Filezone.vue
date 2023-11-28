@@ -1,7 +1,8 @@
 <template>
   <div v-if="visibleFiles.length" class="file-zone" ref="slider">
-    <template v-for="file in visibleFiles" ::key="file.id">
+
       <FileItem
+      v-for="file,index in visibleFiles" :key="index"
         :file="file"
         :fileName="file.name"
         :fileSize="formatFileSize(file.size)"
@@ -9,7 +10,7 @@
         :hidden="!visibleFiles.includes(file)"
         @handleRemoveItem="handleRemoveItem(file)"
       />
-    </template>
+
   </div>
 </template>
 

@@ -44,10 +44,11 @@
         />
         <template v-if="files.length >= 4">
           <div class="left-icon" @click="buttonLeft">
-            <IconLeftArrow />
+            <IconArrow direction="left" />
           </div>
           <div class="right-icon" @click="buttonRight">
-            <IconRightArrow />
+            <!-- <IconRightArrow /> -->
+            <IconArrow direction="right" />
           </div>
         </template>
       </div>
@@ -62,8 +63,7 @@ import IconExcel from "@/components/icons/IconExcel.vue";
 import IconPdf from "@/components/icons/IconPdf.vue";
 import IconWord from "@/components/icons/IconWord.vue";
 import IconUpload from "@/components/icons/IconUpload.vue";
-import IconRightArrow from "@/components/icons/IconRightArrow.vue";
-import IconLeftArrow from "@/components/icons/IconLeftArrow.vue";
+import IconArrow from "@/components/icons/IconArrow.vue";
 
 import {
   isValidFileType,
@@ -78,8 +78,7 @@ export default {
     IconUpload,
     IconWord,
     Filezone,
-    IconRightArrow,
-    IconLeftArrow,
+    IconArrow,
   },
 
   props: {
