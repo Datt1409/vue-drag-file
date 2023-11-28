@@ -6,19 +6,29 @@
       @dragleave="onDragLeave"
       @drop="onDrop"
     >
-      <IconUpload />
-      <div class="drop-text-box">
-        <h4 class="drop-heading">Drag and drop files</h4>
-        <h4 class="drop-text" @click="onChooseFile">Browse files</h4>
-        <input
-          type="file"
-          ref="fileInputRef"
-          style="display: none"
-          accept=".pdf, .doc, .docx, .xls, .xlsx"
-          maxlength="10485760"
-          @change="onChange"
-        />
-      </div>
+      <template v-if="isDragging">
+        <h3 class="drop-heading">Drop here!</h3>
+      </template>
+
+      <template v-else-if="isError && !isDragging">
+        <h3 class="drop-headding">Upload failed!</h3>
+      </template>
+
+      <template v-else-if="!isError && !isDragging">
+        <IconUpload />
+        <div class="drop-text-box">
+          <h4 class="drop-heading">Drag and drop files</h4>
+          <h4 class="drop-text" @click="onChooseFile">Browse files</h4>
+          <input
+            type="file"
+            ref="fileInputRef"
+            style="display: none"
+            accept=".pdf, .doc, .docx, .xls, .xlsx"
+            maxlength="10485760"
+            @change="onChange"
+          />
+        </div>
+      </template>
     </div>
 
     <template v-if="isError">
@@ -156,7 +166,7 @@ export default {
         this.isError = false;
       } else {
         this.isError = true;
-
+        this.isDragging = false;
         // If
         if (!this.isValidFileSize(newFiles, this.maxItemSize)) {
           this.errorMessage = "The maximum file size is 10MB";
